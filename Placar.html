@@ -104,7 +104,11 @@
 
     function subtractPoint(team) {
       var score = document.getElementById(team + "-score").innerHTML;
+      if (score > 0) {
       score--;
+      } else {
+        score == score
+      }
       document.getElementById(team + "-score").innerHTML = score;
     }
 
