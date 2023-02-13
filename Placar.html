@@ -1,0 +1,160 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      overflow: hidden;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .score {
+      font-size: 380px;
+      width: 400px;
+      height: 400px;
+      background-color: black;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      margin: 0 10px;
+      position: relative;
+      top: 0;
+    }
+
+    .red-team .score {
+      background-color: #ff0000;
+      color: #fff;
+    }
+
+    .blue-team .score {
+      background-color: #0066ff;
+      color: #fff;
+    }
+
+    button {
+      padding: 8px 14px;
+      background-color: #00000000;
+      color: #fff;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      position: static;
+      bottom: 0;
+      left: 0;
+    }
+
+    .header .reset {
+      position: absolute;
+      top: 50%;
+      left: 2%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      font-size: 30;
+    }
+
+    .header .full {
+      position: absolute;
+      top: 60%;
+      left: 2%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      font-size: 30;
+    }
+
+    .minusred {
+      position: absolute;
+      top: 80%;
+      left: 10%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      font-size: 80;
+    }
+
+    .minusblue {
+      position: absolute;
+      top: 80%;
+      left: 90%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      font-size: 80;
+    }
+  </style>
+  <script>
+    function addPoint(team) {
+      var score = document.getElementById(team + "-score").innerHTML;
+      if ((score == 8 && document.getElementById("red-score").innerHTML == 9) || (score == 8 && document.getElementById("blue-score").innerHTML == 9) || (score == 9)) {
+        resetScores();
+      } else {
+        score++;
+        document.getElementById(team + "-score").innerHTML = score;
+      }
+    }
+
+    function resetScores() {
+      document.getElementById("red-score").innerHTML = 0;
+      document.getElementById("blue-score").innerHTML = 0;
+    }
+
+    function subtractPoint(team) {
+      var score = document.getElementById(team + "-score").innerHTML;
+      score--;
+      document.getElementById(team + "-score").innerHTML = score;
+    }
+
+    function toggleFullScreen() {
+      var element = document.documentElement;
+      if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+  </script>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <div class="header">
+      <button class="reset" onclick="resetScores()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+      </br>
+      <button class="full" onclick="toggleFullScreen()"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</head>
+
+<body>
+  <div style="display: flex; justify-content: center; align-items: center;S">
+    <div class="red-team">
+      <div id="red-score" class="score" onclick="addPoint('red')">0</div>
+      <button class="minusred" onclick="subtractPoint('red')">-</button>
+    </div>
+    <div class="blue-team">
+      <div id="blue-score" class="score" onclick="addPoint('blue')">0</div>
+      <button class="minusblue" onclick="subtractPoint('blue')">-</button>
+    </div>
+  </div>
+</body>
+
+</html>
